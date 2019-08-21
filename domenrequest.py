@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 
 r = requests.get('https://vk.com')
 soup = BeautifulSoup(r.text, 'html.parser')
-print(r.text)
-print(soup.prettify())
+#print(r.text)
+#print(soup.prettify())
 
 def parse():
     title = soup.title.string
