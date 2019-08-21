@@ -6,7 +6,9 @@ soup = BeautifulSoup(r.text, 'html.parser')
 #print(r.text)
 #print(soup.prettify())
 
-def parse():
+def parse(domen):
+    r = requests.get(domen)
+    soup = BeautifulSoup(r.text, 'html.parser')
     title = soup.title.string
     keywords = ''
     for keyword in soup.find_all('keywords'):
