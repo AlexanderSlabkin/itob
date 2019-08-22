@@ -1,26 +1,35 @@
 from sqltables import InfoSite, Domen
 from domenrequest import parse
-import schedule
-import time
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+#import schedule
+#import time
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
 
 def job():
+    engine = create_engine('sqlite:///sqlalchemy_example.db')
     session = sessionmaker()
     session.configure(bind=engine)
-    domens = session.query(Domen).all()
+    Base.metadata.bind = engine
+    s = session()
+    domens = s.query(Domen).all()
     for domen in domens:
-        parsed = parse(domen)
+        parsed = parse(domen.name_domen)
         infosite = InfoSite(url=parsed[0], title=parsed[1], description=parsed[2], keywords=parsed[3])
-        session.add(infosite)
-        session.commit()
+        s.add(infosite)
         
-    session.add(infosite)
-    session.commit()
-    
+    s.commit()
+    sites = s.query(InfoSite).all()
+    for site in sites:
+        print(site)
 
 
-
+'''
 schedule.every().day.do(job)
-
 while 1:
     schedule.run_pending()
     time.sleep(1)
+'''
+if __name__ == "__main__":
+    job()
