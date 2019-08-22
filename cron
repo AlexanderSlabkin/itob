@@ -1,1 +1,3 @@
+crontab -e
+add
 0 0 * * * ./itob.py

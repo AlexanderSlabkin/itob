@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from sqltables import Domen
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
@@ -13,7 +14,6 @@ Base.metadata.bind = engine
 s = session()
 domens = ['vk.com', 'youtube.com', 'ok.ru']
 for domen in domens:
-    do = Domen(name_domen=domen)
     s.add(Domen(name_domen=domen))
 
 s.commit()

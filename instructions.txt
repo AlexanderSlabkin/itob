@@ -1,0 +1,9 @@
+1)alembic upgrade head
+
+2)python sqlfill.py
+
+3)python itob.py
+
+4)cron for schedule every day
+
+5)python one.py - example queries
