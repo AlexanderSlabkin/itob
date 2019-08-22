@@ -45,7 +45,7 @@ if __name__ == "__main__":
     with open('config', 'r') as f:
         last_id = int(f.readline())
     print(last_id)
-    e = Explorer(last_id=last_id, check_twice=True)
+    e = Explorer(last_id=last_id)#, check_twice=True)
     e.job()
     with open('config', 'w') as f:
         f.write(str(e.last_id))
