@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from sqltables import InfoSite, Domen
 from domenrequest import parse
 from sqlalchemy import create_engine
