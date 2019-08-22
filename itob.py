@@ -23,6 +23,7 @@ def job():
     sites = s.query(InfoSite).all()
     for site in sites:
         print(site)
+        print(site.url, site.title, site.description, site.keywords, site.date_of_operation)
 
 
 '''
