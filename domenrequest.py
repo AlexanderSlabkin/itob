@@ -7,7 +7,7 @@ soup = BeautifulSoup(r.text, 'html.parser')
 #print(soup.prettify())
 
 def parse(domen):
-    r = requests.get(domen)
+    r = requests.get('https:'+domen)
     soup = BeautifulSoup(r.text, 'html.parser')
     title = soup.title.string
     keywords = ''

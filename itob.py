@@ -1,12 +1,18 @@
-from sqltables import InfoSite
+from sqltables import InfoSite, Domen
 from domenrequest import parse
 import schedule
 import time
 
 def job():
-
-    parsed = parse('domen.com')
-    infosite = InfoSite(url = parsed[0])
+    session = sessionmaker()
+    session.configure(bind=engine)
+    domens = session.query(Domen).all()
+    for domen in domens:
+        parsed = parse(domen)
+        infosite = InfoSite(url=parsed[0], title=parsed[1], description=parsed[2], keywords=parsed[3])
+        session.add(infosite)
+        session.commit()
+        
     session.add(infosite)
     session.commit()
     
