@@ -8,16 +8,22 @@ def parse(domen):
     url = 'https://'+domen
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
-    title = ''
-    if soup.title:
-        title = soup.title.get_text()
-    title = soup.find('title').get_text()
-    keywords = ''
+    for_table = {}
+    for_table['url'] = url
+    for_table['title'] = soup.find('title').get_text()
+    for_table['keywords'] = ''
     for keyword in soup.find_all('keywords'):
-        keywords += keyword.string + ' '
+        for_table['keywords'] += keyword.string + ' '
+    if len(for_table['keywords']) > 1: for_table['keywords'].pop() 
     description = soup.find(attrs={'name': 'description'})
-    if description: description = description.get('content')
-    return url, title, description, keywords[:-1]
+    for_table['description'] = ''
+    if description: for_table['description'] = description.get('content')
+
+    for i in for_table:
+        if len(i) > 249:
+            print('Warning: too long value')
+
+    return for_table
 
 
 if __name__ == '__main__':

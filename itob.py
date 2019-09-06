@@ -28,7 +28,9 @@ class Explorer(object):
 
         for domen in domens:
             parsed = parse(domen.name_domen)
-            infosite = InfoSite(url=parsed[0], title=parsed[1], description=parsed[2], keywords=parsed[3], parent=domen)
+            infosite = InfoSite(url=parsed['url'], title=parsed['title'],\
+            description=parsed['description'], keywords=parsed['keywords'],\
+            parent=domen)
             s.add(infosite)
             
         s.commit()
